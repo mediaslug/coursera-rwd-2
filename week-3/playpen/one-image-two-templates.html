@@ -54,17 +54,57 @@
 				<div class="modal-dialog" style="width:800">
 					<div class="modal-content">
 						<div class = "modal-body">
-							<img style="width:100%" src = "{{}}" />
+							<img style="width:100%" src = "{{src}}" />
 						</div>
 					</div>
 				</div>
 			</div>
 		</script>
 
-		<script type="text/javascript">
-			var source = $("#detail-template").html();
-			var detail_template = Handlebars.compile(source);
-		</script>
+        <script type="text/javascript">
+              var source = $("#detail-template").html();
+              var detail_template = Handlebars.compile(source);
+
+              source = $("#modal-template").html();
+              modal_template = Handlebars.compile(source);
+
+              // this is the object we will be using
+               var data = {
+                    src: "https://upload.wikimedia.org/wikipedia/commons/archive/9/97/20101017074210%21The_Earth_seen_from_Apollo_17.jpg", 
+                    title:"The Earth seen from Apollo 17",
+                    author:"Ed g2s"
+                 };
+
+              // this instantiates the detail template
+              $("#detailsbtn").click(function() {
+                    // hide the modal if it is showing
+                    $("#imageModal").modal('hide');
+
+                    var html = detail_template(data);
+                    $("#content").html(html);
+
+              });
+
+              // this instatiates the modal template
+              $("#modalbtn").click(function() {
+
+                    var html = modal_template(data);
+                    $("#content").html(html);
+                
+                    // we can only show the modal once the template has been instantiate, because it doesn't exist before that
+                    $("#imageModal").modal('show');
+
+                    // create a call back for when the modal is hidden so we can re-display the detail template
+                    $("#imageModal").on('hidden.bs.modal', function() {
+                          $("#detailsbtn").click();
+                    });
+
+
+
+              });
+
+
+        </script>
 
 	</body>
 	
