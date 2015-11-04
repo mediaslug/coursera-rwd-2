@@ -24,13 +24,48 @@
 				</ul>
 			<!-- the content of the web page starts off empty because we will fill it later from the template -->
 			<div id="content" class="container-fluid" role="main">
+
+
 			</div>
 		</div> <!-- end the container div-->
 
 		<!-- This is our template. it displays an image with a title and author headings the bits in curly braces {{}} are template expressions. this code uses bootstrap to provide a grid based layout-->
+		<script id="detail-template" type="text/x-handlebars-template">
+		<br>
+		<div class="row-fluid">
+			<div class="col-sm-5">
+				<img style="width:100%" src = "{{src}}" />
+			</div>
+			<div class="col-sm-7"> 
+				<h1> {{title}} </h1>
+				<h3 class="author"> {{author}}</h3>
+			</div>
+		</div>
 
+		</script>
 
-		
+		    <!-- This template displays a modal pop-up of the image. 
+         It has quite a bit of boilder plate HTML code but in 
+         essence it just displays and image tag within a 
+         set of divs that define the modal  -->
+
+		<script id="modal-template" type="text/x-handlebars-template">
+			<div id="imageModal" class = "modal fade" role="dialog">
+				<div class="modal-dialog" style="width:800">
+					<div class="modal-content">
+						<div class = "modal-body">
+							<img style="width:100%" src = "{{}}" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</script>
+
+		<script type="text/javascript">
+			var source = $("#detail-template").html();
+			var detail_template = Handlebars.compile(source);
+		</script>
+
 	</body>
 	
 </html>
